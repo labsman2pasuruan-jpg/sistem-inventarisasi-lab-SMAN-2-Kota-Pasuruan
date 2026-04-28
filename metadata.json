@@ -1,0 +1,5 @@
+{
+  "name": "Inventaris Lab SMAN 2 Pasuruan",
+  "description": "Aplikasi manajemen inventaris alat dan bahan laboratorium untuk SMA Negeri 2 Pasuruan, mencakup manajemen stok, transaksi peminjaman, dan SOP.",
+  "requestFramePermissions": ["camera"]
+}
