@@ -38,8 +38,10 @@ import {
   QrCode,
   ArrowUpRight,
   ArrowDownLeft,
-  ClipboardCheck
+  ClipboardCheck,
+  Copy
 } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -1231,6 +1233,36 @@ const MasterInventory = ({ user }: { user: User | null }) => {
               </div>
             </div>
             
+            <div className="p-12 pb-0">
+               <div className="flex flex-col md:flex-row gap-8 items-center justify-between p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                  <div className="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 group transition-all hover:border-emerald-200 hover:shadow-md">
+                    <QRCodeSVG 
+                      value={viewItem.item_code} 
+                      size={140}
+                      level="H"
+                      includeMargin={false}
+                      className="mix-blend-multiply"
+                    />
+                  </div>
+                  <div className="flex-1 space-y-3 text-center md:text-left">
+                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest">Digital Asset Identity</h3>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed">Pindai kode QR ini untuk identifikasi cepat sistem atau cetak sebagai label fisik pada aset laboratorium.</p>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+                       <button 
+                        onClick={() => {
+                          const url = `https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=${viewItem.item_code}`;
+                          navigator.clipboard.writeText(url);
+                          alert('Link QR Code berhasil disalin ke clipboard!');
+                        }}
+                        className="flex items-center gap-2 px-6 py-2.5 bg-white border border-slate-200 rounded-xl text-[10px] font-bold text-slate-600 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all uppercase tracking-widest shadow-sm group"
+                      >
+                        <Copy className="w-4 h-4 text-emerald-500 group-hover:text-emerald-400" /> Copy QR Link
+                      </button>
+                    </div>
+                  </div>
+               </div>
+            </div>
+
             <div className="p-12 grid grid-cols-1 md:grid-cols-2 gap-12 bg-white">
               <div className="space-y-8">
                 <div>
